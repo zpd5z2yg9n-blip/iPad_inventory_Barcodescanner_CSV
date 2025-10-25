@@ -271,7 +271,7 @@
         }
 
         .item-details {
-            color: #1d1d1f;
+            color: #86868b;
             font-size: 15px;
             margin-bottom: 2px;
         }
@@ -580,17 +580,8 @@
 
                 html5QrCode = new Html5Qrcode("reader");
 
-                // Kamera mit erweiterten Constraints starten
-                const cameraConfig = {
-                    facingMode: "environment",
-                    advanced: [{
-                        focusMode: "continuous",
-                        torch: false
-                    }]
-                };
-
                 await html5QrCode.start(
-                    cameraConfig,
+                    { facingMode: "environment" },
                     {
                         fps: 10,
                         qrbox: { width: 280, height: 150 },
