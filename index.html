@@ -402,7 +402,6 @@
             <div class="controls">
                 <button id="startBtn" class="btn-primary">📷 Scanner Starten</button>
                 <button id="stopBtn" class="btn-danger hidden">⏹️ Scanner Stoppen</button>
-                <button id="torchBtn" class="btn-primary hidden" onclick="toggleTorch()">🔦 Licht An</button>
                 <button id="exportBtn" class="btn-success">💾 CSV Export</button>
                 <button id="clearBtn" class="btn-danger">🗑️ Liste Löschen</button>
             </div>
@@ -572,7 +571,7 @@
             showAlert('Item gelöscht', 'info');
         }
 
-        // Scanner starten mit Autofocus und Taschenlampe
+        // Scanner starten
         async function startScanner() {
             try {
                 const reader = document.getElementById('reader');
@@ -586,9 +585,6 @@
                         fps: 10,
                         qrbox: { width: 280, height: 150 },
                         aspectRatio: 1.777778,
-                        experimentalFeatures: {
-                            useBarCodeDetectorIfSupported: true
-                        },
                         // CODE_128 zuerst für beste Performance
                         formatsToSupport: [
                             Html5QrcodeSupportedFormats.CODE_128,  // Standard - priorisiert
@@ -615,9 +611,6 @@
                     },
                     (errorMessage) => {}
                 );
-
-                // Taschenlampen-Button einblenden
-                document.getElementById('torchBtn').classList.remove('hidden');
                 
                 isScanning = true;
                 document.getElementById('startBtn').classList.add('hidden');
@@ -667,8 +660,6 @@
             if (html5QrCode && isScanning) {
                 await html5QrCode.stop();
                 document.getElementById('reader').classList.add('hidden');
-                document.getElementById('torchBtn').classList.add('hidden');
-                torchEnabled = false;
                 isScanning = false;
                 document.getElementById('startBtn').classList.remove('hidden');
                 document.getElementById('stopBtn').classList.add('hidden');
