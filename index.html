@@ -411,46 +411,63 @@
         updateDisplay();
         showAlert('Item gelöscht', 'info');
     }
+// ✅ NEUE Scanner starten Funktion mit CODE_128 als Standard, QR, EAN etc., Autofokus ON
+async function startScanner() {
+    try {
+        const reader = document.getElementById('reader');
+        reader.classList.remove('hidden');
 
-    // Scanner starten
-    async function startScanner() {
-        try {
-            const reader = document.getElementById('reader');
-            reader.classList.remove('hidden');
-            
-            html5QrCode = new Html5Qrcode("reader");
-            
-            await html5QrCode.start(
-                { facingMode: "environment" },
-                {
-                    fps: 10,
-                    qrbox: { width: 250, height: 250 }
+        html5QrCode = new Html5Qrcode("reader");
+
+        await html5QrCode.start(
+            {
+                facingMode: "environment"
+            },
+            {
+                fps: 10,
+                qrbox: { width: 250, height: 250 },
+
+                // ✅ Autofokus aktivieren (falls vom Browser unterstützt)
+                experimentalFeatures: {
+                    useBarCodeDetectorIfSupported: true
                 },
-                (decodedText) => {
-                    // Verhindere Duplikate innerhalb von 2 Sekunden
-                    const lastItem = inventory[inventory.length - 1];
-                    const now = Date.now();
-                    if (lastItem && lastItem.barcode === decodedText && 
-                        (now - new Date(lastItem.timestamp).getTime()) < 2000) {
-                        return;
-                    }
-                    
-                    addItem(decodedText);
-                },
-                (errorMessage) => {
-                    // Ignoriere Scan-Fehler
+
+                // ✅ Unterstützte Barcode-/QR-Formate
+                formatsToSupport: [
+                    Html5QrcodeSupportedFormats.CODE_128,  // Standard
+                    Html5QrcodeSupportedFormats.EAN_13,    // Produktcodes
+                    Html5QrcodeSupportedFormats.QR_CODE,   // QR
+                    Html5QrcodeSupportedFormats.CODE_39,   // z.B. Lager
+                    Html5QrcodeSupportedFormats.UPC_A,
+                    Html5QrcodeSupportedFormats.UPC_E
+                ]
+            },
+            (decodedText) => {
+                // Duplikate innerhalb von 2 Sekunden verhindern
+                const lastItem = inventory[inventory.length - 1];
+                const now = Date.now();
+                if (lastItem && lastItem.barcode === decodedText &&
+                    (now - new Date(lastItem.timestamp).getTime()) < 2000) {
+                    return;
                 }
-            );
 
-            isScanning = true;
-            document.getElementById('startBtn').classList.add('hidden');
-            document.getElementById('stopBtn').classList.remove('hidden');
-            showAlert('📷 Scanner aktiv - Halte Barcodes vor die Kamera', 'info');
-            
-        } catch (err) {
-            showAlert('Fehler beim Starten der Kamera: ' + err, 'danger');
-        }
+                addItem(decodedText);
+            },
+            (errorMessage) => {
+                // Fehler ignorieren
+            }
+        );
+
+        isScanning = true;
+        document.getElementById('startBtn').classList.add('hidden');
+        document.getElementById('stopBtn').classList.remove('hidden');
+        showAlert('📷 Scanner aktiv – jetzt Barcodes vorhalten (Code128 bevorzugt)', 'info');
+
+    } catch (err) {
+        showAlert('Fehler beim Starten der Kamera: ' + err, 'danger');
+        console.error(err);
     }
+}
 
     // Scanner stoppen
     async function stopScanner() {
