@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="de">
 <head>
     <meta charset="UTF-8">
@@ -16,246 +15,371 @@
             box-sizing: border-box;
         }
 
-```
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
-        padding: 20px;
-        color: #333;
-    }
-
-    .container {
-        max-width: 900px;
-        margin: 0 auto;
-    }
-
-    .header {
-        background: white;
-        padding: 25px;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        margin-bottom: 20px;
-        text-align: center;
-    }
-
-    h1 {
-        color: #667eea;
-        font-size: 28px;
-        margin-bottom: 10px;
-    }
-
-    .stats {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 15px;
-        margin-top: 20px;
-    }
-
-    .stat-box {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-        padding: 20px;
-        border-radius: 15px;
-        text-align: center;
-    }
-
-    .stat-number {
-        font-size: 32px;
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-
-    .stat-label {
-        font-size: 14px;
-        opacity: 0.9;
-    }
-
-    .scanner-section {
-        background: white;
-        padding: 25px;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        margin-bottom: 20px;
-    }
-
-    #reader {
-        border-radius: 15px;
-        overflow: hidden;
-        margin-bottom: 20px;
-        max-width: 100%;
-    }
-
-    .controls {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-bottom: 20px;
-    }
-
-    button {
-        flex: 1;
-        min-width: 150px;
-        padding: 15px 25px;
-        font-size: 16px;
-        font-weight: 600;
-        border: none;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    .btn-primary {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-    }
-
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-    }
-
-    .btn-success {
-        background: linear-gradient(135deg, #56ab2f, #a8e063);
-        color: white;
-    }
-
-    .btn-danger {
-        background: linear-gradient(135deg, #eb3349, #f45c43);
-        color: white;
-    }
-
-    .form-section {
-        background: #f8f9fa;
-        padding: 20px;
-        border-radius: 12px;
-        margin-bottom: 20px;
-    }
-
-    input[type="text"] {
-        width: 100%;
-        padding: 15px;
-        font-size: 16px;
-        border: 2px solid #e0e0e0;
-        border-radius: 10px;
-        margin-bottom: 10px;
-        transition: border-color 0.3s;
-    }
-
-    input[type="text"]:focus {
-        outline: none;
-        border-color: #667eea;
-    }
-
-    .inventory-list {
-        background: white;
-        padding: 25px;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-
-    .inventory-item {
-        background: #f8f9fa;
-        padding: 15px;
-        border-radius: 10px;
-        margin-bottom: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        transition: all 0.3s ease;
-    }
-
-    .inventory-item:hover {
-        background: #e9ecef;
-        transform: translateX(5px);
-    }
-
-    .item-info {
-        flex: 1;
-    }
-
-    .item-barcode {
-        font-weight: bold;
-        color: #667eea;
-        font-size: 18px;
-        margin-bottom: 5px;
-    }
-
-    .item-details {
-        color: #666;
-        font-size: 14px;
-    }
-
-    .item-time {
-        color: #999;
-        font-size: 12px;
-        margin-top: 5px;
-    }
-
-    .btn-delete {
-        background: #f45c43;
-        color: white;
-        padding: 8px 15px;
-        border-radius: 8px;
-        border: none;
-        cursor: pointer;
-        font-size: 14px;
-    }
-
-    .alert {
-        padding: 15px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        animation: slideIn 0.3s ease;
-    }
-
-    .alert-success {
-        background: #d4edda;
-        color: #155724;
-        border: 2px solid #c3e6cb;
-    }
-
-    .alert-info {
-        background: #d1ecf1;
-        color: #0c5460;
-        border: 2px solid #bee5eb;
-    }
-
-    @keyframes slideIn {
-        from {
-            opacity: 0;
-            transform: translateY(-20px);
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f7;
+            min-height: 100vh;
+            padding: 20px;
+            color: #86868b;
         }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
 
-    .hidden {
-        display: none;
-    }
-
-    @media (max-width: 768px) {
-        .controls {
-            flex-direction: column;
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
         }
-        
-        button {
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .logo-placeholder {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            background: linear-gradient(135deg, #007AFF, #5856D6);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        h1 {
+            color: #86868b;
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #86868b;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .location-settings {
+            background: #f5f5f7;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #86868b;
+            margin-bottom: 6px;
+        }
+
+        select, input[type="text"] {
             width: 100%;
-            min-width: auto;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 1px solid #d2d2d7;
+            border-radius: 10px;
+            background: white;
+            color: #86868b;
+            transition: all 0.2s ease;
+            -webkit-appearance: none;
+            appearance: none;
         }
-    }
-</style>
-```
 
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23999' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: #007AFF;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .stat-box {
+            background: #f5f5f7;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 600;
+            color: #007AFF;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #86868b;
+        }
+
+        .scanner-section {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        #reader {
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            max-width: 100%;
+            border: 1px solid #d2d2d7;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        button {
+            flex: 1;
+            min-width: 150px;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: #007AFF;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0051D5;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .btn-torch {
+            background: #FFD60A;
+            color: #1d1d1f;
+        }
+
+        .btn-torch:hover {
+            background: #FFC700;
+        }
+
+        .btn-success {
+            background: #007AFF;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #0051D5;
+        }
+
+        .btn-success:active {
+            transform: scale(0.98);
+        }
+
+        .btn-danger {
+            background: #007AFF;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #0051D5;
+        }
+
+        .btn-danger:active {
+            transform: scale(0.98);
+        }
+
+        .form-section {
+            background: #f5f5f7;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .form-section h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #86868b;
+        }
+
+        .inventory-list {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+        }
+
+        .inventory-list h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #86868b;
+        }
+
+        .inventory-item {
+            background: #f5f5f7;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .inventory-item:hover {
+            background: #e8e8ed;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-barcode {
+            font-weight: 600;
+            color: #007AFF;
+            font-size: 17px;
+            margin-bottom: 4px;
+        }
+
+        .item-details {
+            color: #1d1d1f;
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+
+        .item-location {
+            color: #86868b;
+            font-size: 13px;
+            margin-bottom: 2px;
+        }
+
+        .item-time {
+            color: #86868b;
+            font-size: 12px;
+        }
+
+        .btn-delete {
+            background: #007AFF;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .btn-delete:hover {
+            background: #0051D5;
+        }
+
+        .btn-delete:active {
+            transform: scale(0.95);
+        }
+
+        .alert {
+            padding: 14px 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            animation: slideIn 0.3s ease;
+            font-size: 15px;
+        }
+
+        .alert-success {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .alert-info {
+            background: #E3F2FD;
+            color: #1976D2;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+                min-width: auto;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>📦 iPad Inventar Scanner</h1>
-            <p>Massenverarbeitung von Barcodes</p>
+            <div class="logo-placeholder">📦</div>
+            <h1>iPad Inventar Scanner</h1>
+            <p class="subtitle">Massenverarbeitung von Barcodes</p>
+            
+            <div class="location-settings">
+                <div class="input-group">
+                    <label class="input-label">Stadt</label>
+                    <select id="citySelect">
+                        <option value="">Stadt auswählen...</option>
+                        <option value="NE">NE - Neuss</option>
+                        <option value="JU">JU - Jüchen</option>
+                        <option value="KA">KA - Kaarst</option>
+                        <option value="ME">ME - Meerbusch</option>
+                        <option value="GV">GV - Grevenbroich</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Schule / Standort</label>
+                    <input type="text" id="schoolInput" placeholder="z.B. Hauptgebäude">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Raum / Gebäude (optional)</label>
+                    <input type="text" id="roomInput" placeholder="z.B. Raum 205">
+                </div>
+            </div>
+
             <div class="stats">
                 <div class="stat-box">
                     <div class="stat-number" id="totalScanned">0</div>
@@ -272,283 +396,380 @@
             </div>
         </div>
 
-```
-    <div class="scanner-section">
-        <div id="alertBox" class="hidden"></div>
-        
-        <div class="controls">
-            <button id="startBtn" class="btn-primary">📷 Scanner Starten</button>
-            <button id="stopBtn" class="btn-danger hidden">⏹️ Scanner Stoppen</button>
-            <button id="exportBtn" class="btn-success">💾 CSV Export</button>
-            <button id="clearBtn" class="btn-danger">🗑️ Liste Löschen</button>
-        </div>
-
-        <div id="reader" class="hidden"></div>
-
-        <div class="form-section" id="manualEntry">
-            <h3>Manuelle Eingabe</h3>
-            <input type="text" id="manualBarcode" placeholder="Barcode manuell eingeben...">
-            <input type="text" id="itemDescription" placeholder="Beschreibung (optional)...">
-            <button class="btn-primary" id="manualAddBtn">➕ Hinzufügen</button>
-        </div>
-    </div>
-
-    <div class="inventory-list">
-        <h2>📋 Inventarliste (<span id="listCount">0</span>)</h2>
-        <div id="inventoryItems"></div>
-    </div>
-</div>
-
-<script>
-    let html5QrCode = null;
-    let inventory = [];
-    let sessionCount = 0;
-    let isScanning = false;
-
-    // Lade gespeicherte Daten
-    function loadInventory() {
-        const saved = localStorage.getItem('inventory');
-        if (saved) {
-            inventory = JSON.parse(saved);
-            updateDisplay();
-        }
-    }
-
-    // Speichere Inventar
-    function saveInventory() {
-        localStorage.setItem('inventory', JSON.stringify(inventory));
-    }
-
-    // Zeige Alert
-    function showAlert(message, type = 'success') {
-        const alertBox = document.getElementById('alertBox');
-        alertBox.className = `alert alert-${type}`;
-        alertBox.textContent = message;
-        alertBox.classList.remove('hidden');
-        
-        setTimeout(() => {
-            alertBox.classList.add('hidden');
-        }, 3000);
-    }
-
-    // Füge Item hinzu
-    function addItem(barcode, description = '') {
-        const timestamp = new Date();
-        const item = {
-            id: Date.now(),
-            barcode: barcode,
-            description: description,
-            timestamp: timestamp.toISOString(),
-            timeString: timestamp.toLocaleString('de-DE')
-        };
-
-        inventory.push(item);
-        sessionCount++;
-        saveInventory();
-        updateDisplay();
-        
-        // Visuelles Feedback
-        showAlert(`✅ Barcode hinzugefügt: ${barcode}`);
-        
-        // Audio Feedback (optional)
-        playBeep();
-    }
-
-    // Piep-Ton
-    function playBeep() {
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        oscillator.frequency.value = 800;
-        oscillator.type = 'sine';
-        
-        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-        
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + 0.1);
-    }
-
-    // Aktualisiere Anzeige
-    function updateDisplay() {
-        document.getElementById('totalScanned').textContent = inventory.length;
-        document.getElementById('sessionCount').textContent = sessionCount;
-        document.getElementById('listCount').textContent = inventory.length;
-        
-        if (inventory.length > 0) {
-            const lastItem = inventory[inventory.length - 1];
-            const time = new Date(lastItem.timestamp);
-            document.getElementById('lastScanTime').textContent = 
-                time.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
-        }
-
-        const container = document.getElementById('inventoryItems');
-        if (inventory.length === 0) {
-            container.innerHTML = '<p style="text-align: center; color: #999;">Noch keine Items gescannt</p>';
-            return;
-        }
-
-        container.innerHTML = inventory.slice().reverse().map(item => `
-            <div class="inventory-item">
-                <div class="item-info">
-                    <div class="item-barcode">${item.barcode}</div>
-                    ${item.description ? `<div class="item-details">${item.description}</div>` : ''}
-                    <div class="item-time">⏰ ${item.timeString}</div>
-                </div>
-                <button class="btn-delete" onclick="deleteItem(${item.id})">🗑️</button>
+        <div class="scanner-section">
+            <div id="alertBox" class="hidden"></div>
+            
+            <div class="controls">
+                <button id="startBtn" class="btn-primary">📷 Scanner Starten</button>
+                <button id="stopBtn" class="btn-danger hidden">⏹️ Scanner Stoppen</button>
+                <button id="torchBtn" class="btn-primary hidden" onclick="toggleTorch()">🔦 Licht An</button>
+                <button id="exportBtn" class="btn-success">💾 CSV Export</button>
+                <button id="clearBtn" class="btn-danger">🗑️ Liste Löschen</button>
             </div>
-        `).join('');
-    }
 
-    // Lösche Item
-    function deleteItem(id) {
-        inventory = inventory.filter(item => item.id !== id);
-        saveInventory();
-        updateDisplay();
-        showAlert('Item gelöscht', 'info');
-    }
-// ✅ NEUE Scanner starten Funktion mit CODE_128 als Standard, QR, EAN etc., Autofokus ON
-async function startScanner() {
-    try {
-        const reader = document.getElementById('reader');
-        reader.classList.remove('hidden');
+            <div id="reader" class="hidden"></div>
 
-        html5QrCode = new Html5Qrcode("reader");
+            <div class="form-section" id="manualEntry">
+                <h3>Manuelle Eingabe</h3>
+                <input type="text" id="manualBarcode" placeholder="Barcode manuell eingeben...">
+                <input type="text" id="itemDescription" placeholder="Beschreibung (optional)...">
+                <button class="btn-primary" id="manualAddBtn">➕ Hinzufügen</button>
+            </div>
+        </div>
 
-        await html5QrCode.start(
-            {
-                facingMode: "environment"
-            },
-            {
-                fps: 10,
-                qrbox: { width: 250, height: 250 },
+        <div class="inventory-list">
+            <h2>📋 Inventarliste (<span id="listCount">0</span>)</h2>
+            <div id="inventoryItems"></div>
+        </div>
+    </div>
 
-                // ✅ Autofokus aktivieren (falls vom Browser unterstützt)
-                experimentalFeatures: {
-                    useBarCodeDetectorIfSupported: true
-                },
+    <script>
+        let html5QrCode = null;
+        let inventory = [];
+        let sessionCount = 0;
+        let isScanning = false;
 
-                // ✅ Unterstützte Barcode-/QR-Formate
-                formatsToSupport: [
-                    Html5QrcodeSupportedFormats.CODE_128,  // Standard
-                    Html5QrcodeSupportedFormats.EAN_13,    // Produktcodes
-                    Html5QrcodeSupportedFormats.QR_CODE,   // QR
-                    Html5QrcodeSupportedFormats.CODE_39,   // z.B. Lager
-                    Html5QrcodeSupportedFormats.UPC_A,
-                    Html5QrcodeSupportedFormats.UPC_E
-                ]
-            },
-            (decodedText) => {
-                // Duplikate innerhalb von 2 Sekunden verhindern
+        // Lade gespeicherte Daten
+        function loadInventory() {
+            const saved = localStorage.getItem('inventory');
+            if (saved) {
+                inventory = JSON.parse(saved);
+                updateDisplay();
+            }
+            
+            // Lade gespeicherte Standortdaten
+            const savedCity = localStorage.getItem('selectedCity');
+            const savedSchool = localStorage.getItem('selectedSchool');
+            const savedRoom = localStorage.getItem('selectedRoom');
+            
+            if (savedCity) document.getElementById('citySelect').value = savedCity;
+            if (savedSchool) document.getElementById('schoolInput').value = savedSchool;
+            if (savedRoom) document.getElementById('roomInput').value = savedRoom;
+        }
+
+        // Speichere Inventar und Standortdaten
+        function saveInventory() {
+            localStorage.setItem('inventory', JSON.stringify(inventory));
+        }
+
+        function saveLocationSettings() {
+            localStorage.setItem('selectedCity', document.getElementById('citySelect').value);
+            localStorage.setItem('selectedSchool', document.getElementById('schoolInput').value);
+            localStorage.setItem('selectedRoom', document.getElementById('roomInput').value);
+        }
+
+        // Event Listeners für Standortfelder
+        document.getElementById('citySelect').addEventListener('change', saveLocationSettings);
+        document.getElementById('schoolInput').addEventListener('input', saveLocationSettings);
+        document.getElementById('roomInput').addEventListener('input', saveLocationSettings);
+
+        // Zeige Alert
+        function showAlert(message, type = 'success') {
+            const alertBox = document.getElementById('alertBox');
+            alertBox.className = `alert alert-${type}`;
+            alertBox.textContent = message;
+            alertBox.classList.remove('hidden');
+            
+            setTimeout(() => {
+                alertBox.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Füge Item hinzu
+        function addItem(barcode, description = '') {
+            const timestamp = new Date();
+            const city = document.getElementById('citySelect').value;
+            const school = document.getElementById('schoolInput').value;
+            const room = document.getElementById('roomInput').value;
+            
+            const item = {
+                id: Date.now(),
+                barcode: barcode,
+                description: description,
+                city: city,
+                school: school,
+                room: room,
+                timestamp: timestamp.toISOString(),
+                timeString: timestamp.toLocaleString('de-DE')
+            };
+
+            inventory.push(item);
+            sessionCount++;
+            saveInventory();
+            updateDisplay();
+            
+            showAlert(`✅ Barcode hinzugefügt: ${barcode}`);
+            playBeep();
+        }
+
+        // Piep-Ton
+        function playBeep() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.1);
+        }
+
+        // Aktualisiere Anzeige
+        function updateDisplay() {
+            document.getElementById('totalScanned').textContent = inventory.length;
+            document.getElementById('sessionCount').textContent = sessionCount;
+            document.getElementById('listCount').textContent = inventory.length;
+            
+            if (inventory.length > 0) {
                 const lastItem = inventory[inventory.length - 1];
-                const now = Date.now();
-                if (lastItem && lastItem.barcode === decodedText &&
-                    (now - new Date(lastItem.timestamp).getTime()) < 2000) {
+                const time = new Date(lastItem.timestamp);
+                document.getElementById('lastScanTime').textContent = 
+                    time.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+            }
+
+            const container = document.getElementById('inventoryItems');
+            if (inventory.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #86868b;">Noch keine Items gescannt</p>';
+                return;
+            }
+
+            container.innerHTML = inventory.slice().reverse().map(item => {
+                let locationInfo = '';
+                if (item.city || item.school || item.room) {
+                    const parts = [];
+                    if (item.city) parts.push(item.city);
+                    if (item.school) parts.push(item.school);
+                    if (item.room) parts.push(item.room);
+                    locationInfo = `<div class="item-location">📍 ${parts.join(' • ')}</div>`;
+                }
+                
+                return `
+                    <div class="inventory-item">
+                        <div class="item-info">
+                            <div class="item-barcode">${item.barcode}</div>
+                            ${item.description ? `<div class="item-details">${item.description}</div>` : ''}
+                            ${locationInfo}
+                            <div class="item-time">⏰ ${item.timeString}</div>
+                        </div>
+                        <button class="btn-delete" onclick="deleteItem(${item.id})">🗑️</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Lösche Item
+        function deleteItem(id) {
+            inventory = inventory.filter(item => item.id !== id);
+            saveInventory();
+            updateDisplay();
+            showAlert('Item gelöscht', 'info');
+        }
+
+        // Scanner starten mit Autofocus und Taschenlampe
+        async function startScanner() {
+            try {
+                const reader = document.getElementById('reader');
+                reader.classList.remove('hidden');
+
+                html5QrCode = new Html5Qrcode("reader");
+
+                // Kamera mit erweiterten Constraints starten
+                const cameraConfig = {
+                    facingMode: "environment",
+                    advanced: [{
+                        focusMode: "continuous",
+                        torch: false
+                    }]
+                };
+
+                await html5QrCode.start(
+                    cameraConfig,
+                    {
+                        fps: 10,
+                        qrbox: { width: 280, height: 150 },
+                        aspectRatio: 1.777778,
+                        experimentalFeatures: {
+                            useBarCodeDetectorIfSupported: true
+                        },
+                        // CODE_128 zuerst für beste Performance
+                        formatsToSupport: [
+                            Html5QrcodeSupportedFormats.CODE_128,  // Standard - priorisiert
+                            Html5QrcodeSupportedFormats.CODE_39,
+                            Html5QrcodeSupportedFormats.CODE_93,
+                            Html5QrcodeSupportedFormats.EAN_13,
+                            Html5QrcodeSupportedFormats.EAN_8,
+                            Html5QrcodeSupportedFormats.UPC_A,
+                            Html5QrcodeSupportedFormats.UPC_E,
+                            Html5QrcodeSupportedFormats.QR_CODE,
+                            Html5QrcodeSupportedFormats.DATA_MATRIX,
+                            Html5QrcodeSupportedFormats.PDF_417,
+                            Html5QrcodeSupportedFormats.AZTEC
+                        ]
+                    },
+                    (decodedText) => {
+                        const lastItem = inventory[inventory.length - 1];
+                        const now = Date.now();
+                        if (lastItem && lastItem.barcode === decodedText &&
+                            (now - new Date(lastItem.timestamp).getTime()) < 2000) {
+                            return;
+                        }
+                        addItem(decodedText);
+                    },
+                    (errorMessage) => {}
+                );
+
+                // Taschenlampen-Button einblenden
+                document.getElementById('torchBtn').classList.remove('hidden');
+                
+                isScanning = true;
+                document.getElementById('startBtn').classList.add('hidden');
+                document.getElementById('stopBtn').classList.remove('hidden');
+                showAlert('📷 Scanner aktiv - CODE_128 optimiert', 'info');
+
+            } catch (err) {
+                showAlert('Fehler beim Starten der Kamera: ' + err, 'danger');
+                console.error(err);
+            }
+        }
+
+        // Taschenlampe umschalten
+        let torchEnabled = false;
+        async function toggleTorch() {
+            try {
+                if (!html5QrCode || !isScanning) {
+                    showAlert('Scanner muss erst gestartet werden', 'info');
                     return;
                 }
 
-                addItem(decodedText);
-            },
-            (errorMessage) => {
-                // Fehler ignorieren
+                const stream = html5QrCode.getRunningTrackCameraCapabilities();
+                const track = html5QrCode.getRunningTrackSettings();
+                
+                if (stream && stream.torch) {
+                    torchEnabled = !torchEnabled;
+                    await track.applyConstraints({
+                        advanced: [{ torch: torchEnabled }]
+                    });
+                    
+                    const torchBtn = document.getElementById('torchBtn');
+                    torchBtn.textContent = torchEnabled ? '🔦 Licht Aus' : '🔦 Licht An';
+                    torchBtn.style.background = torchEnabled ? '#FFD60A' : '#007AFF';
+                    
+                    showAlert(torchEnabled ? '💡 Taschenlampe an' : '🌙 Taschenlampe aus', 'info');
+                } else {
+                    showAlert('Taschenlampe wird nicht unterstützt', 'info');
+                }
+            } catch (err) {
+                showAlert('Taschenlampe konnte nicht aktiviert werden', 'info');
+                console.error(err);
             }
-        );
-
-        isScanning = true;
-        document.getElementById('startBtn').classList.add('hidden');
-        document.getElementById('stopBtn').classList.remove('hidden');
-        showAlert('📷 Scanner aktiv – jetzt Barcodes vorhalten (Code128 bevorzugt)', 'info');
-
-    } catch (err) {
-        showAlert('Fehler beim Starten der Kamera: ' + err, 'danger');
-        console.error(err);
-    }
-}
-
-    // Scanner stoppen
-    async function stopScanner() {
-        if (html5QrCode && isScanning) {
-            await html5QrCode.stop();
-            document.getElementById('reader').classList.add('hidden');
-            isScanning = false;
-            document.getElementById('startBtn').classList.remove('hidden');
-            document.getElementById('stopBtn').classList.add('hidden');
-            showAlert('Scanner gestoppt', 'info');
-        }
-    }
-
-    // CSV Export
-    function exportCSV() {
-        if (inventory.length === 0) {
-            showAlert('Keine Daten zum Exportieren', 'info');
-            return;
         }
 
-        const csv = [
-            ['Barcode', 'Beschreibung', 'Zeitstempel'],
-            ...inventory.map(item => [
-                item.barcode,
-                item.description || '',
-                item.timeString
-            ])
-        ].map(row => row.join(',')).join('\n');
+        // Scanner stoppen
+        async function stopScanner() {
+            if (html5QrCode && isScanning) {
+                await html5QrCode.stop();
+                document.getElementById('reader').classList.add('hidden');
+                document.getElementById('torchBtn').classList.add('hidden');
+                torchEnabled = false;
+                isScanning = false;
+                document.getElementById('startBtn').classList.remove('hidden');
+                document.getElementById('stopBtn').classList.add('hidden');
+                showAlert('Scanner gestoppt', 'info');
+            }
+        }
 
-        const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
-        const link = document.createElement('a');
-        const url = URL.createObjectURL(blob);
+        // CSV Export mit Datum/Zeit im Namen und Metadaten
+        function exportCSV() {
+            if (inventory.length === 0) {
+                showAlert('Keine Daten zum Exportieren', 'info');
+                return;
+            }
+
+            const now = new Date();
+            const dateTimeString = now.getFullYear() +
+                String(now.getMonth() + 1).padStart(2, '0') +
+                String(now.getDate()).padStart(2, '0') +
+                String(now.getHours()).padStart(2, '0') +
+                String(now.getMinutes()).padStart(2, '0') +
+                String(now.getSeconds()).padStart(2, '0');
+
+            const city = document.getElementById('citySelect').value || 'Stadt';
+            const school = document.getElementById('schoolInput').value || 'Standort';
+            
+            // Dateiname: Stadt_Schule_YYYYMMDDHHMMSS
+            const filename = `${city}_${school}_${dateTimeString}`;
+
+            // CSV mit allen Metadaten für Spotlight-Suche
+            const csv = [
+                ['Barcode', 'Beschreibung', 'Stadt', 'Schule', 'Raum', 'Zeitstempel', 'Export-Datum', 'Dateiname'],
+                ...inventory.map(item => [
+                    item.barcode,
+                    item.description || '',
+                    item.city || '',
+                    item.school || '',
+                    item.room || '',
+                    item.timeString,
+                    now.toLocaleString('de-DE'),
+                    filename
+                ])
+            ].map(row => row.join(',')).join('\n');
+
+            const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            
+            link.setAttribute('href', url);
+            link.setAttribute('download', `${filename}.csv`);
+            link.style.visibility = 'hidden';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showAlert(`✅ CSV-Datei heruntergeladen: ${filename}.csv`);
+        }
+
+        // Event Listeners
+        document.getElementById('startBtn').addEventListener('click', startScanner);
+        document.getElementById('stopBtn').addEventListener('click', stopScanner);
+        document.getElementById('exportBtn').addEventListener('click', exportCSV);
         
-        link.setAttribute('href', url);
-        link.setAttribute('download', `inventar_${new Date().toISOString().split('T')[0]}.csv`);
-        link.style.visibility = 'hidden';
-        
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        showAlert('✅ CSV-Datei heruntergeladen!');
-    }
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            if (confirm('Wirklich alle Einträge löschen?')) {
+                inventory = [];
+                sessionCount = 0;
+                saveInventory();
+                updateDisplay();
+                showAlert('Liste gelöscht', 'info');
+            }
+        });
 
-    // Event Listeners
-    document.getElementById('startBtn').addEventListener('click', startScanner);
-    document.getElementById('stopBtn').addEventListener('click', stopScanner);
-    document.getElementById('exportBtn').addEventListener('click', exportCSV);
-    
-    document.getElementById('clearBtn').addEventListener('click', () => {
-        if (confirm('Wirklich alle Einträge löschen?')) {
-            inventory = [];
-            sessionCount = 0;
-            saveInventory();
-            updateDisplay();
-            showAlert('Liste gelöscht', 'info');
-        }
-    });
+        document.getElementById('manualAddBtn').addEventListener('click', () => {
+            const barcode = document.getElementById('manualBarcode').value.trim();
+            const description = document.getElementById('itemDescription').value.trim();
+            
+            if (barcode) {
+                addItem(barcode, description);
+                document.getElementById('manualBarcode').value = '';
+                document.getElementById('itemDescription').value = '';
+            }
+        });
 
-    document.getElementById('manualAddBtn').addEventListener('click', () => {
-        const barcode = document.getElementById('manualBarcode').value.trim();
-        const description = document.getElementById('itemDescription').value.trim();
-        
-        if (barcode) {
-            addItem(barcode, description);
-            document.getElementById('manualBarcode').value = '';
-            document.getElementById('itemDescription').value = '';
-        }
-    });
+        document.getElementById('manualBarcode').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('manualAddBtn').click();
+            }
+        });
 
-    // Enter-Taste für manuelle Eingabe
-    document.getElementById('manualBarcode').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            document.getElementById('manualAddBtn').click();
-        }
-    });
-
-    // Initial laden
-    loadInventory();
-</script>
-```
-
+        // Initial laden
+        loadInventory();
+    </script>
 </body>
 </html>
