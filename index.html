@@ -1,0 +1,902 @@
+Scanner mit Cloudanbindung
+
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Inventar Pro">
+    <title>iPad Inventar Scanner Pro</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+        color: #333;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .header {
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        margin-bottom: 20px;
+    }
+
+    .header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    h1 {
+        color: #667eea;
+        font-size: 28px;
+    }
+
+    .sync-status {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .sync-online {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    .sync-offline {
+        background: #f8d7da;
+        color: #721c24;
+    }
+
+    .sync-syncing {
+        background: #fff3cd;
+        color: #856404;
+    }
+
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+    }
+
+    .stat-box {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .stat-label {
+        font-size: 14px;
+        opacity: 0.9;
+    }
+
+    .main-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .scanner-section, .settings-section {
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .section-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #667eea;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #reader {
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 20px;
+        max-width: 100%;
+    }
+
+    .controls {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+
+    button {
+        padding: 12px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-success {
+        background: linear-gradient(135deg, #56ab2f, #a8e063);
+        color: white;
+    }
+
+    .btn-danger {
+        background: linear-gradient(135deg, #eb3349, #f45c43);
+        color: white;
+    }
+
+    .btn-secondary {
+        background: linear-gradient(135deg, #bdc3c7, #95a5a6);
+        color: white;
+    }
+
+    .btn-small {
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+
+    .form-section {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
+
+    input[type="text"], input[type="password"], input[type="number"], select {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        transition: border-color 0.3s;
+    }
+
+    input:focus, select:focus {
+        outline: none;
+        border-color: #667eea;
+    }
+
+    .input-group {
+        margin-bottom: 15px;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: #555;
+        font-size: 14px;
+    }
+
+    .inventory-list {
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .list-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .search-box {
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .filter-select {
+        min-width: 150px;
+    }
+
+    .inventory-item {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease;
+    }
+
+    .inventory-item:hover {
+        background: #e9ecef;
+        transform: translateX(5px);
+    }
+
+    .item-info {
+        flex: 1;
+    }
+
+    .item-barcode {
+        font-weight: bold;
+        color: #667eea;
+        font-size: 18px;
+        margin-bottom: 5px;
+        font-family: 'Courier New', monospace;
+    }
+
+    .item-details {
+        color: #666;
+        font-size: 14px;
+    }
+
+    .item-meta {
+        display: flex;
+        gap: 15px;
+        margin-top: 5px;
+        flex-wrap: wrap;
+    }
+
+    .item-tag {
+        background: #e7e9ff;
+        color: #667eea;
+        padding: 3px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+    }
+
+    .item-time {
+        color: #999;
+        font-size: 12px;
+    }
+
+    .item-actions {
+        display: flex;
+        gap: 5px;
+    }
+
+    .btn-icon {
+        width: 35px;
+        height: 35px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        font-size: 16px;
+    }
+
+    .alert {
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        animation: slideIn 0.3s ease;
+    }
+
+    .alert-success {
+        background: #d4edda;
+        color: #155724;
+        border: 2px solid #c3e6cb;
+    }
+
+    .alert-info {
+        background: #d1ecf1;
+        color: #0c5460;
+        border: 2px solid #bee5eb;
+    }
+
+    .alert-warning {
+        background: #fff3cd;
+        color: #856404;
+        border: 2px solid #ffeaa7;
+    }
+
+    .alert-danger {
+        background: #f8d7da;
+        color: #721c24;
+        border: 2px solid #f5c6cb;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal.active {
+        display: flex;
+    }
+
+    .modal-content {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        max-width: 500px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .modal-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #667eea;
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #999;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-left: 10px;
+    }
+
+    .badge-success {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    .badge-warning {
+        background: #fff3cd;
+        color: #856404;
+    }
+
+    @media (max-width: 768px) {
+        .main-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .controls {
+            flex-direction: column;
+        }
+        
+        button {
+            width: 100%;
+        }
+
+        .header-top {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-top">
+                <div>
+                    <h1>📦 Inventar Scanner Pro</h1>
+                    <p>Code 128 Massenverarbeitung mit Cloud-Sync</p>
+                </div>
+                <div class="sync-status sync-offline" id="syncStatus">
+                    <span id="syncIcon">⚠️</span>
+                    <span id="syncText">Offline</span>
+                </div>
+            </div>
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-number" id="totalScanned">0</div>
+                    <div class="stat-label">Gesamt</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="sessionCount">0</div>
+                    <div class="stat-label">Diese Sitzung</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="todayCount">0</div>
+                    <div class="stat-label">Heute</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="lastScanTime">--:--</div>
+                    <div class="stat-label">Letzter Scan</div>
+                </div>
+            </div>
+        </div>
+
+```
+    <div id="alertBox" class="hidden"></div>
+
+    <div class="main-grid">
+        <div class="scanner-section">
+            <div class="section-title">📷 Scanner</div>
+            
+            <div class="controls">
+                <button id="startBtn" class="btn-primary" style="flex: 1;">▶️ Scanner Starten</button>
+                <button id="stopBtn" class="btn-danger hidden" style="flex: 1;">⏹️ Stoppen</button>
+            </div>
+
+            <div id="reader" class="hidden"></div>
+
+            <div class="form-section">
+                <div class="input-group">
+                    <label>Barcode (Code 128)</label>
+                    <input type="text" id="manualBarcode" placeholder="Barcode eingeben...">
+                </div>
+                <div class="input-group">
+                    <label>Beschreibung</label>
+                    <input type="text" id="itemDescription" placeholder="z.B. iPad Pro 12.9, Seriennr. XYZ...">
+                </div>
+                <div class="input-group">
+                    <label>Kategorie</label>
+                    <select id="itemCategory">
+                        <option value="">Keine Kategorie</option>
+                        <option value="iPad">iPad</option>
+                        <option value="iPhone">iPhone</option>
+                        <option value="MacBook">MacBook</option>
+                        <option value="Zubehör">Zubehör</option>
+                        <option value="Sonstiges">Sonstiges</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Standort</label>
+                    <input type="text" id="itemLocation" placeholder="z.B. Raum 301, Schrank A...">
+                </div>
+                <button class="btn-primary" id="manualAddBtn" style="width: 100%;">➕ Hinzufügen</button>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <div class="section-title">⚙️ Einstellungen & Sync</div>
+            
+            <div class="form-section">
+                <h3>Cloud-Speicher (Persistent Storage API)</h3>
+                <p style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                    Daten werden automatisch in der Cloud gespeichert und synchronisiert.
+                </p>
+                
+                <div class="input-group">
+                    <label>Projekt-ID / Speicher-Key</label>
+                    <input type="text" id="storageKey" placeholder="z.B. inventar-firma-2025" value="inventory-default">
+                </div>
+
+                <div class="input-group">
+                    <label>
+                        <input type="checkbox" id="autoSync" checked>
+                        Automatische Synchronisation
+                    </label>
+                </div>
+
+                <div class="controls">
+                    <button class="btn-success" id="syncNowBtn" style="flex: 1;">☁️ Jetzt Synchronisieren</button>
+                    <button class="btn-secondary" id="showSyncLog" style="flex: 1;">📋 Sync-Log</button>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Export & Backup</h3>
+                <div class="controls">
+                    <button class="btn-success" id="exportCSVBtn" style="flex: 1;">📄 CSV Export</button>
+                    <button class="btn-success" id="exportJSONBtn" style="flex: 1;">📋 JSON Export</button>
+                </div>
+                <button class="btn-secondary" id="importBtn" style="width: 100%; margin-top: 10px;">📥 Import JSON</button>
+                <input type="file" id="importFile" accept=".json" class="hidden">
+            </div>
+
+            <div class="form-section">
+                <h3>Daten verwalten</h3>
+                <div class="controls">
+                    <button class="btn-danger" id="clearLocalBtn" style="flex: 1;">🗑️ Lokal löschen</button>
+                    <button class="btn-danger" id="clearCloudBtn" style="flex: 1;">☁️ Cloud löschen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="inventory-list">
+        <div class="list-controls">
+            <h2>📋 Inventarliste (<span id="listCount">0</span>)</h2>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <input type="text" id="searchBox" class="search-box" placeholder="🔍 Suchen...">
+                <select id="filterCategory" class="filter-select">
+                    <option value="">Alle Kategorien</option>
+                    <option value="iPad">iPad</option>
+                    <option value="iPhone">iPhone</option>
+                    <option value="MacBook">MacBook</option>
+                    <option value="Zubehör">Zubehör</option>
+                    <option value="Sonstiges">Sonstiges</option>
+                </select>
+                <button class="btn-secondary btn-small" id="sortBtn">🔄 Sortieren</button>
+            </div>
+        </div>
+        <div id="inventoryItems"></div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal" id="editModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title">✏️ Item bearbeiten</div>
+            <button class="close-btn" onclick="closeEditModal()">×</button>
+        </div>
+        <div class="input-group">
+            <label>Barcode</label>
+            <input type="text" id="editBarcode" readonly>
+        </div>
+        <div class="input-group">
+            <label>Beschreibung</label>
+            <input type="text" id="editDescription">
+        </div>
+        <div class="input-group">
+            <label>Kategorie</label>
+            <select id="editCategory">
+                <option value="">Keine</option>
+                <option value="iPad">iPad</option>
+                <option value="iPhone">iPhone</option>
+                <option value="MacBook">MacBook</option>
+                <option value="Zubehör">Zubehör</option>
+                <option value="Sonstiges">Sonstiges</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Standort</label>
+            <input type="text" id="editLocation">
+        </div>
+        <button class="btn-primary" id="saveEditBtn" style="width: 100%;">💾 Speichern</button>
+    </div>
+</div>
+
+<!-- Sync Log Modal -->
+<div class="modal" id="syncLogModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title">📋 Synchronisations-Log</div>
+            <button class="close-btn" onclick="closeSyncLogModal()">×</button>
+        </div>
+        <div id="syncLogContent" style="font-family: monospace; font-size: 12px; max-height: 400px; overflow-y: auto;"></div>
+    </div>
+</div>
+
+<script>
+    // ===== GLOBALE VARIABLEN =====
+    let html5QrCode = null;
+    let inventory = [];
+    let sessionCount = 0;
+    let isScanning = false;
+    let currentEditId = null;
+    let syncLog = [];
+    let autoSyncInterval = null;
+
+    // ===== CLOUD STORAGE API =====
+    const CloudStorage = {
+        async save(key, data) {
+            try {
+                const result = await window.storage.set(key, JSON.stringify(data), true);
+                this.log('✅ Cloud-Speicherung erfolgreich', key);
+                return result !== null;
+            } catch (error) {
+                this.log('❌ Cloud-Speicherung fehlgeschlagen: ' + error.message, key);
+                return false;
+            }
+        },
+
+        async load(key) {
+            try {
+                const result = await window.storage.get(key, true);
+                if (result && result.value) {
+                    this.log('✅ Cloud-Daten geladen', key);
+                    return JSON.parse(result.value);
+                }
+                return null;
+            } catch (error) {
+                this.log('⚠️ Keine Cloud-Daten gefunden: ' + error.message, key);
+                return null;
+            }
+        },
+
+        async delete(key) {
+            try {
+                await window.storage.delete(key, true);
+                this.log('🗑️ Cloud-Daten gelöscht', key);
+                return true;
+            } catch (error) {
+                this.log('❌ Löschen fehlgeschlagen: ' + error.message, key);
+                return false;
+            }
+        },
+
+        log(message, key = '') {
+            const timestamp = new Date().toLocaleString('de-DE');
+            const logEntry = `[${timestamp}] ${message} ${key ? '(Key: ' + key + ')' : ''}`;
+            syncLog.unshift(logEntry);
+            syncLog = syncLog.slice(0, 50); // Nur letzte 50 Einträge
+            localStorage.setItem('syncLog', JSON.stringify(syncLog));
+            console.log(logEntry);
+        }
+    };
+
+    // ===== INITIALISIERUNG =====
+    async function init() {
+        loadSyncLog();
+        await loadInventory();
+        setupEventListeners();
+        updateSyncStatus();
+        
+        // Auto-Sync alle 30 Sekunden wenn aktiviert
+        if (document.getElementById('autoSync').checked) {
+            startAutoSync();
+        }
+    }
+
+    function loadSyncLog() {
+        const saved = localStorage.getItem('syncLog');
+        if (saved) {
+            syncLog = JSON.parse(saved);
+        }
+    }
+
+    // ===== INVENTAR LADEN & SPEICHERN =====
+    async function loadInventory() {
+        // Erst lokal laden
+        const localData = localStorage.getItem('inventory');
+        if (localData) {
+            inventory = JSON.parse(localData);
+        }
+
+        // Dann Cloud laden (wenn verfügbar)
+        const storageKey = document.getElementById('storageKey').value;
+        try {
+            const cloudData = await CloudStorage.load(storageKey);
+            
+            if (cloudData && cloudData.items) {
+                // Merge: Cloud-Daten haben Vorrang, aber lokale neue Items behalten
+                const cloudIds = new Set(cloudData.items.map(i => i.id));
+                const localOnly = inventory.filter(i => !cloudIds.has(i.id));
+                
+                inventory = [...cloudData.items, ...localOnly];
+                
+                if (localOnly.length > 0) {
+                    showAlert(`☁️ ${cloudData.items.length} Items aus Cloud geladen, ${localOnly.length} lokale Items zusammengeführt`, 'info');
+                } else {
+                    showAlert(`☁️ ${cloudData.items.length} Items aus Cloud geladen`, 'success');
+                }
+                
+                updateSyncStatus(true);
+            } else {
+                updateSyncStatus(false);
+            }
+        } catch (error) {
+            CloudStorage.log('⚠️ Cloud-Laden fehlgeschlagen: ' + error.message);
+            updateSyncStatus(false);
+        }
+
+        updateDisplay();
+    }
+
+    async function saveInventory() {
+        // Lokal speichern
+        localStorage.setItem('inventory', JSON.stringify(inventory));
+        
+        // Cloud speichern wenn Auto-Sync aktiv
+        if (document.getElementById('autoSync').checked) {
+            await syncToCloud();
+        }
+    }
+
+    async function syncToCloud() {
+        const storageKey = document.getElementById('storageKey').value;
+        updateSyncStatus(null, true); // Syncing Status
+        
+        const data = {
+            items: inventory,
+            lastSync: new Date().toISOString(),
+            version: '2.0'
+        };
+        
+        const success = await CloudStorage.save(storageKey, data);
+        updateSyncStatus(success);
+        
+        if (success) {
+            showAlert('☁️ Erfolgreich synchronisiert!', 'success');
+        } else {
+            showAlert('⚠️ Synchronisation fehlgeschlagen', 'warning');
+        }
+        
+        return success;
+    }
+
+    // ===== SYNC STATUS =====
+    function updateSyncStatus(isOnline = false, isSyncing = false) {
+        const statusDiv = document.getElementById('syncStatus');
+        const icon = document.getElementById('syncIcon');
+        const text = document.getElementById('syncText');
+        
+        if (isSyncing) {
+            statusDiv.className = 'sync-status sync-syncing';
+            icon.textContent = '🔄';
+            text.textContent = 'Synchronisiere...';
+        } else if (isOnline) {
+            statusDiv.className = 'sync-status sync-online';
+            icon.textContent = '☁️';
+            text.textContent = 'Cloud aktiv';
+        } else {
+            statusDiv.className = 'sync-status sync-offline';
+            icon.textContent = '💾';
+            text.textContent = 'Nur lokal';
+        }
+    }
+
+    function startAutoSync() {
+        if (autoSyncInterval) clearInterval(autoSyncInterval);
+        autoSyncInterval = setInterval(async () => {
+            if (inventory.length > 0) {
+                await syncToCloud();
+            }
+        }, 30000); // 30 Sekunden
+    }
+
+    function stopAutoSync() {
+        if (autoSyncInterval) {
+            clearInterval(autoSyncInterval);
+            autoSyncInterval = null;
+        }
+    }
+
+    // ===== ITEMS HINZUFÜGEN =====
+    function addItem(barcode, description = '', category = '', location = '') {
+        // Duplikat-Check
+        const exists = inventory.find(i => i.barcode === barcode);
+        if (exists) {
+            showAlert(`⚠️ Barcode bereits vorhanden: ${barcode}`, 'warning');
+            return;
+        }
+
+        const timestamp = new Date();
+        const item = {
+            id: Date.now() + Math.random(), // Eindeutige ID
+            barcode: barcode,
+            description: description,
+            category: category,
+            location: location,
+            timestamp: timestamp.toISOString(),
+            timeString: timestamp.toLocaleString('de-DE'),
+            date: timestamp.toLocaleDateString('de-DE')
+        };
+
+        inventory.push(item);
+        sessionCount++;
+        saveInventory();
+        updateDisplay();
+        
+        showAlert(`✅ Hinzugefügt: ${barcode}`, 'success');
+        playBeep();
+    }
+
+    // ===== SCANNER =====
+    async function startScanner() {
+        try {
+            const reader = document.getElementById('reader');
+            reader.classList.remove('hidden');
+            
+            html5QrCode = new Html5Qrcode("reader");
+            
+            await html5QrCode.start(
+                { facingMode: "environment" },
+                {
+                    fps: 10,
+                    qrbox: { width: 300, height: 150 },
+                    formatsToSupport: [Html5QrcodeSupportedFormats.CODE_128]
+                },
+                (decodedText) => {
+                    // Duplikat-Schutz: 2 Sekunden Pause
+                    const lastItem = inventory[inventory.length - 1];
+                    const now = Date.now();
+                    if (lastItem && lastItem.barcode === decodedText && 
+                        (now - new Date(lastItem.timestamp).getTime()) < 2000) {
+                        return;
+                    }
+                    
+                    addItem(decodedText);
+                }
+            );
+
+            isScanning = true;
+            document.getElementById('startBtn').classList.add('hidden');
+            document.getElementById('stopBtn').classList.remove('hidden');
+            showAlert('📷 Scanner aktiv - Code 128 Barcodes werden erkannt', 'info');
+            
+        } catch (err) {
+            showAlert('❌ Kamera-Fehler: ' + err.message, 'danger');
+        }
+    }
+
+    async function stopScanner() {
+        if (html5QrCode && isScanning) {
+            await html5QrCode.stop();
+            document.getElementById('reader').classList.add('hidden');
+            isScanning = false;
+            document.getElementById('startBtn').classList.remove('hidden');
+            document.getElementById('stopBtn').classList.add('hidden');
+            showAlert('Scanner gestoppt', 'info');
+        }
+    }
+
+    // ===== ANZEIGE AKTUALISIEREN =
+```
